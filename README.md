@@ -1,20 +1,17 @@
 # Skyoria.pl Winter — Resource Pack (Minecraft Java 1.21.5)
 
-Oficjalna paczka zasobów do scoreboardu serwera Skyoria.pl. Zawiera zimowe logo SKYORIA (custom font `skyoria:sidebar`, znak U+E001) oraz czcionkę `skyoria:ice`.
+Resource pack dla scoreboardu Skyoria.pl. Poprawione logo: font bitmapowy `skyoria:sidebar`, U+E001, wysokość 24 (wcześniej 62).
 
-## Pobierz ZIP bezpośrednio
+## Bezpośredni link ZIP
 https://raw.githubusercontent.com/mizudoubleg-glitch/skyoria-resourcepack/main/Skyoria-ResourcePack-1.21.5.zip
 
-## Instalacja
-1. Ustaw w pliku `server.properties`:
+## server.properties
 ```properties
 resource-pack=https://raw.githubusercontent.com/mizudoubleg-glitch/skyoria-resourcepack/main/Skyoria-ResourcePack-1.21.5.zip
-resource-pack-sha1=dbc04afa8793bc7188d630ee44c0e6d7e3c26cf1
+resource-pack-sha1=9d70c1b5cacac60e138cd01395ec20d28913efd7
 require-resource-pack=true
 ```
-2. Umieść plugin Skyoria.pl Winter 10.0 w folderze `plugins/`, zastępując poprzednią wersję.
-3. Uruchom ponownie serwer Minecraft.
-4. Gracz musi zaakceptować resource pack, aby zobaczyć graficzne logo w scoreboardzie.
 
-## Informacja
-ZIP jest skompresowaną, zoptymalizowaną wersją oryginalnej paczki, zawierającą font scoreboardu oraz lodową czcionkę.
+Ten SHA-1 pochodzi z ukończonego, pomyślnego GitHub Actions po aktualizacji ZIP-a.
+Instaluj plugin Skyoria.pl Winter 10.1 w folderze `plugins/` na Paper 1.21.5.
+Zatrzymaj serwer przed podmianą JAR, usuń stare wersje tego samego pluginu, uruchom serwer ponownie.
