@@ -1,0 +1,39 @@
+name: Fix Skyoria scoreboard logo bitmap
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-resource-pack.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resize bitmap font in ZIP
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, zipfile, os, tempfile, hashlib
+          path='Skyoria-ResourcePack-1.21.5.zip'
+          fd,tmp=tempfile.mkstemp(suffix='.zip');os.close(fd)
+          with zipfile.ZipFile(path) as src, zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as dst:
+              for name in src.namelist():
+                  data=src.read(name)
+                  if name=='assets/skyoria/font/sidebar.json':
+                      font=json.loads(data)
+                      font['providers'][0]['height']=24
+                      font['providers'][0]['ascent']=21
+                      data=json.dumps(font,ensure_ascii=False,indent=2).encode('utf-8')
+                  dst.writestr(name,data)
+          os.replace(tmp,path)
+          with zipfile.ZipFile(path) as z: assert z.testzip() is None
+          print('pack sha1:',hashlib.sha1(open(path,'rb').read()).hexdigest())
+          PY
+      - name: Publish the fixed archive
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Skyoria-ResourcePack-1.21.5.zip
+          git diff --staged --quiet || (git commit -m 'Fix Skyoria sidebar logo font size' && git push)
